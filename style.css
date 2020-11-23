@@ -36,12 +36,18 @@ body {
 
 .control {
     width: 320px;
-    height: 260px;
+    /* height: 260px; */
     position: relative;
     margin: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+}
+
+#logs {
+    width: 320px;
+    position: relative;
+    margin: 20px;
 }
 
 .playground {
