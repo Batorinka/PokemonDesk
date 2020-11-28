@@ -4,20 +4,23 @@ class Selectors {
     constructor(name) {
         this.elHP = document.getElementById(`health-${name}`);
         this.elProgressbar = document.getElementById(`progressbar-${name}`);
+        this.elName = document.getElementById(`name-${name}`);
+        this.elHealth = document.getElementById(`health-${name}`);
+        this.elImg = document.getElementById(`img-${name}`);
     }
 }
 
 class Pokemon extends Selectors {
-    constructor({ name, hp, type, selector }) {
+    constructor({ img, name, hp, type, selector, attacks = [] }) {
         super(selector);
+        this.img = img;
         this.name = name;
         this.hp = {
             current: hp,
             total: hp,
         };
         this.type = type;
-
-        this.renderHP();
+        this.attacks = attacks;
     }
 
     changeHP = (count) => {
@@ -30,10 +33,8 @@ class Pokemon extends Selectors {
             this.hp.current = 0;
             alert('Бедный ' + this.name + ' проиграл бой!');
 
-            disableBtn();
-            
+            disableBtn();        
         }
-    
         this.renderHP()
     }
 
@@ -50,6 +51,20 @@ class Pokemon extends Selectors {
     renderProgressHP = () => {
         const procent = this.hp.current / (this.hp.total / 100);
         this.elProgressbar.style.width = procent + '%';
+        if(procent <= 60 && procent >= 20) {
+            this.elHealth.classList.add('low');
+        } else if (procent < 20) {
+            this.elHealth.classList.remove('low');
+            this.elHealth.classList.add('critical');
+        }
+    }
+
+    renderImg = () => {
+        this.elImg.src = this.img;
+    }
+
+    renderName = () => {
+        this.elName.innerHTML = this.name;
     }
     
     generateLog = (count) => {
