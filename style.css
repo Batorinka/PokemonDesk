@@ -34,9 +34,13 @@ body {
     opacity: .4;
 }
 
+.middle-panel {
+    display: flex;
+    flex-direction:column;
+}
+
 .control {
     width: 320px;
-    /* height: 260px; */
     position: relative;
     margin: 20px;
     display: flex;
@@ -277,13 +281,15 @@ body {
     border: 2px solid #ffc55b;
     border-radius: 10px;
     min-height: 30px;
+    min-width: 200px;
     vertical-align: middle;
+    margin: 5px;
     padding: 12px 20px;
     outline: none !important;
     cursor: pointer;
     font-size: 18px;
-
 }
+
 .button:after {
     content: "";
     position: absolute;
@@ -305,6 +311,12 @@ body {
     background: -webkit-gradient(linear, left top, left bottom, from(#ffd78e), to(#ffc55b));
     background: linear-gradient(to bottom, #ffd78e, #ffc55b);
     box-shadow: 0 0 5px 2px white, 0 0 15px #ffe9c1, 0 3px 5px -2px rgba(0, 0, 0, 0.2);
+}
+
+.mainBtn {
+    color: rgb(63, 206, 250);
+    background: #f6de41;
+    border: 2px solid #ff665b;
 }
 
 .candy {
