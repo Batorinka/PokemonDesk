@@ -1,8 +1,24 @@
 import Pokemon from "./Pokemon.js";
-import { pokemons } from "./pokemons.js";
 import { random, countBtn } from "./utils.js";
 
 class Game {
+    getPokemons = async (random = false, id = 0, name = '') => {
+        
+        let url = 'https://reactmarathon-api.netlify.app/api/pokemons';
+        
+        if (name !== '') {
+            url += '?name=' + name;
+        } else if (id !== 0) {
+            url += '?id=' + id;
+        } else if (random) {
+            url += '?random=' + random;
+        }
+
+        const responce = await fetch(url);
+        const body = await responce.json();
+        return body;
+    }
+
     reset = () => {
         const buttons = document.querySelectorAll('.control .kickButton');
         buttons.forEach(item => item.remove());
@@ -11,9 +27,9 @@ class Game {
         this.start();
     }
 
-    start = () => {
-        const pokemon1 = pokemons[random(pokemons.length - 1)];
-        const pokemon2 = pokemons[random(pokemons.length - 1)];
+    start = async () => {
+        let pokemon1 = await this.getPokemons(true);
+        let pokemon2 = await this.getPokemons(true);
         this.init(pokemon1, 'player1');
         this.init(pokemon2, 'player2');
     }
